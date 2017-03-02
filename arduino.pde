@@ -19,7 +19,7 @@ void setup() {
   
   imgOffice = loadImage("office.jpg");
   
-  myBall = new Ball(200, 200);
+  myBall = new Ball(width/2-50, height-100);
   
   myArrow = new Arrow(-25, -25);
   
@@ -41,7 +41,7 @@ void draw() {
   myBall.display();
   
   rotate(0);
-  translate(width/2,height/2);
+  translate(width/2,height/2+180);
   myArrow.move();
   myArrow.display();
     

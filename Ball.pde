@@ -1,7 +1,6 @@
 public class Ball {
   int x, y;
   PImage imgBall;
-  //color blue;
 
   Ball(int newX, int newY) {
     imgBall = loadImage("ball-100.png");
@@ -10,11 +9,10 @@ public class Ball {
   }
 
   void display() {
-    image(imgBall, y, x);
+    image(imgBall, x, y);
   }
 
   void move() {
-    x= x+xValue;
-    y= y+yValue;
+    
   }
 }

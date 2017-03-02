@@ -9,10 +9,10 @@ public class Trash {
   
   void display() {
     if (empty) {
-      image(imgTrashEmpty, width/2-75, 30);
+      image(imgTrashEmpty, width/2-75, 100);
     }
     else {
-      image(imgTrashFull, width/2-75, 30);
+      image(imgTrashFull, width/2-75, 100);
     }
   }
 }
