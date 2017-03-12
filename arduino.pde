@@ -1,7 +1,9 @@
 import processing.net.*;
 import processing.serial.*;
 
-int xPosition, yPosition, xValue, yValue, longShot, shortShot, strenghtValue;
+int xSerial, ySerial, xOrientation, yOrientation, longShot, shortShot, strenghtValue, xDefaultBall;
+
+boolean play=false;
 PImage imgOffice;
 
 Serial port;
@@ -19,7 +21,10 @@ void setup() {
   
   imgOffice = loadImage("office.jpg");
   
-  myBall = new Ball(width/2-50, height-100);
+  int xDefaultBall = (int)random(0+20, (width-120));
+  println(height);
+  final int yDefaultBall = height-100;
+  myBall = new Ball(xDefaultBall, yDefaultBall);
   
   myArrow = new Arrow(-25, -25);
   
@@ -33,11 +38,21 @@ void draw() {
   
   myTrash.display();
   
+  if (longShot == 0 && strenghtValue !=0) {
+    myBall.move(strenghtValue);
+    play = true;
+  }
+  
   strenghtValue = strenght();
+  
+  if (play && longShot==1) {
+    myBall.x = (int)random(0+20, (width-120));
+    myBall.y = height-100;
+    play = false;
+  }
   myPowerBar.move(strenghtValue);
   myPowerBar.display();
   
-  myBall.move();
   myBall.display();
   
   rotate(0);
@@ -56,11 +71,11 @@ void serialEvent(Serial port) {
 
   if ( values.length == 5 ) {
 
-    xPosition= values[0]-346;
-    yPosition= values[1]-344;
+    xSerial = values[0]-346;
+    ySerial = values[1]-344;
     
-    xValue= calculate( values[0], 344 );
-    yValue= calculate( values[1], 346 );
+    xOrientation = calculate( values[0], 344 );
+    yOrientation = calculate( values[1], 346 );
     
     longShot= values[3];
     shortShot= values[4];
@@ -68,7 +83,7 @@ void serialEvent(Serial port) {
 }
 
 int calculate( int returnValue, int baseValue ) {
-  int diff= (returnValue-baseValue)/10;
+  int diff = (returnValue-baseValue)/10;
   return diff;
 }
 
@@ -77,7 +92,7 @@ int strenght() {
       strenghtValue= strenghtValue-10;
     }
     else {
-      strenghtValue= 0;
+      strenghtValue = 0;
     }
     return strenghtValue;
   }

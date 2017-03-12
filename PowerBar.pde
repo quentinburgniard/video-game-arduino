@@ -17,7 +17,6 @@ public class PowerBar {
   void display() {
     noStroke();
     
-    //for(int i=0;i>=-200;i--) {
       if (h<=-150) {
         fill(red);
       }

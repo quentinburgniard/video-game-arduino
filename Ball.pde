@@ -12,7 +12,16 @@ public class Ball {
     image(imgBall, x, y);
   }
 
-  void move() {
+  void move(int strenght) {
+    y=(int)(y+strenght*2.5);
+    x=(x+yOrientation*10);
     
+    int deltaY=(y-(height-100));
+    int deltaX=(x-(width/2-50));
+    
+    if(deltaY != 0 && deltaX !=0){
+      int a=deltaY/deltaX;
+      println (a);
+    }
   }
 }
